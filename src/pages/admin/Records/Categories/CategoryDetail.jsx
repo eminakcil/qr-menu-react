@@ -49,7 +49,7 @@ const CategoryDetail = () => {
             key={product._id}
             title={product.title}
             imgSrc={product.photo}
-            to={getPath('admin.records.categories.detail', { categoryId: product._id })}
+            to={getPath('admin.records.products.detail', { productId: product._id })}
           />
         ))}
       </div>
