@@ -1,9 +1,10 @@
 import { CategoryService } from '@/services'
+import { getPath } from '@/utils'
+import IconItem from '@components/admin/IconItem'
 import Button from '@components/Button'
 import SpinnerLoader from '@components/SpinnerLoader'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
-import CategoryItem from './components/CategoryItem'
 
 const Categories = () => {
   const [categoryList, setCategoryList] = useState(false)
@@ -39,10 +40,11 @@ const Categories = () => {
         <div className={classNames('flex gap-1 flex-wrap')}>
           {categoryList &&
             categoryList.map((category) => (
-              <CategoryItem
+              <IconItem
                 key={category._id}
-                onClick={() => null}
-                category={category}
+                title={category.title}
+                imgSrc={category.photo}
+                to={getPath('admin.records.categories.detail', { categoryId: category._id })}
               />
             ))}
         </div>
