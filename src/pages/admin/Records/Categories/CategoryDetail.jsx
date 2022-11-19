@@ -1,5 +1,6 @@
 import { CategoryService } from '@/services'
 import { getPath } from '@/utils'
+import FloatButton from '@components/admin/FloatButton'
 import IconItem from '@components/admin/IconItem'
 import Button from '@components/Button'
 import SpinnerLoader from '@components/SpinnerLoader'
@@ -41,25 +42,28 @@ const CategoryDetail = () => {
     )
 
   return (
-    <div className="w-full flex flex-col gap-3">
-      <Link
-        to={getPath('admin.records')}
-        className="font-medium text-xl"
-      >
-        Kategoriler
-      </Link>
-      <span className="font-medium text-xl">{category.title}</span>
-      <div className="flex gap-1 flex-wrap">
-        {category.products.map((product) => (
-          <IconItem
-            key={product._id}
-            title={product.title}
-            imgSrc={product.photo}
-            to={getPath('admin.records.products.detail', { productId: product._id })}
-          />
-        ))}
+    <>
+      <div className="w-full flex flex-col gap-3">
+        <Link
+          to={getPath('admin.records')}
+          className="font-medium text-xl"
+        >
+          Kategoriler
+        </Link>
+        <span className="font-medium text-xl">{category.title}</span>
+        <div className="flex gap-1 flex-wrap">
+          {category.products.map((product) => (
+            <IconItem
+              key={product._id}
+              title={product.title}
+              imgSrc={product.photo}
+              to={getPath('admin.records.products.detail', { productId: product._id })}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <FloatButton />
+    </>
   )
 }
 export default CategoryDetail
