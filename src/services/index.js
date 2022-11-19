@@ -1,1 +1,1 @@
-// export * as StrategicPlanService from './strategicPlan'
+export * as CategoryService from './Categories'

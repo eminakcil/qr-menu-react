@@ -1,4 +1,6 @@
+import Categories from './Categories'
+
 const Records = () => {
-  return <div>Records</div>
+  return <Categories />
 }
 export default Records
