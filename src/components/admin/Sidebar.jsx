@@ -27,7 +27,7 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className="w-72">
+    <div className="w-72 shrink-0">
       <div className="flex flex-col divide-y divide-gray-500">
         {routes.map((route, index) => (
           <NavLink

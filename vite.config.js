@@ -17,6 +17,10 @@ export default defineConfig({
         find: '@components',
         replacement: path.join(BASE_PATH, 'src', 'components'),
       },
+      {
+        find: '@pages',
+        replacement: path.join(BASE_PATH, 'src', 'pages'),
+      },
     ],
   },
 })

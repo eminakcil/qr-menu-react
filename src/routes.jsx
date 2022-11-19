@@ -15,6 +15,8 @@ const Records = lazy(() => import('./pages/admin/Records'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
 const Profile = lazy(() => import('./pages/admin/Profile'))
 
+const AdminCategoryDetail = lazy(() => import('@pages/admin/Records/Categories/CategoryDetail'))
+
 /** @type {import('react-router-dom').RouteObject[]} */
 
 const routes = [
@@ -64,10 +66,27 @@ const routes = [
         lazy: true,
       },
       {
-        path: 'records',
         name: 'records',
-        element: <Records />,
-        lazy: true,
+        path: 'records',
+        children: [
+          {
+            index: true,
+            element: <Records />,
+            lazy: true,
+          },
+          {
+            path: 'categories',
+            name: 'categories',
+            children: [
+              {
+                path: ':categoryId',
+                name: 'detail',
+                element: <AdminCategoryDetail />,
+                lazy: true,
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'settings',
