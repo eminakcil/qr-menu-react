@@ -4,7 +4,7 @@ import IconItem from '@components/admin/IconItem'
 import Button from '@components/Button'
 import SpinnerLoader from '@components/SpinnerLoader'
 import { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const CategoryDetail = () => {
   const { categoryId } = useParams()
@@ -41,7 +41,13 @@ const CategoryDetail = () => {
     )
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-3">
+      <Link
+        to={getPath('admin.records')}
+        className="font-medium text-xl"
+      >
+        Kategoriler
+      </Link>
       <span className="font-medium text-xl">{category.title}</span>
       <div className="flex gap-1 flex-wrap">
         {category.products.map((product) => (

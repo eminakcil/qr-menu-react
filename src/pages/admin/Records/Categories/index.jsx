@@ -34,7 +34,7 @@ const Categories = () => {
   if (categoryListLoading) return <SpinnerLoader />
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-3">
       <span className="font-medium text-xl">Kategoriler</span>
       {categoryList && (
         <div className={classNames('flex gap-1 flex-wrap')}>
