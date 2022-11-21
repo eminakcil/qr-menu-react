@@ -1,18 +1,47 @@
+import { errorInfo } from '@/utils'
+import { LoginSchema } from '@/validations/AuthSchema'
 import Input from '@components/Input'
+import { useFormik } from 'formik'
 
 const Login = () => {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: LoginSchema,
+    onSubmit: (values) => {
+      console.log('values :>> ', values)
+    },
+  })
+
   return (
     <div className="min-h-screen bg-gray-800 text-gray-300 grid place-items-center">
       <div className="p-4 bg-gray-700 rounded-2xl border-2 border-solid border-gray-900 max-w-lg w-full">
         <div className="flex flex-col gap-3">
           <span className="font-medium text-xl">Giriş Yap</span>
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <div className="space-y-3">
               <div>
-                <Input label="E-posta Adresi" />
+                <Input
+                  label="E-posta Adresi"
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {errorInfo(formik, 'email')}
               </div>
               <div>
-                <Input label="Şifre" />
+                <Input
+                  label="Şifre"
+                  type="password"
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {errorInfo(formik, 'password')}
               </div>
               <div className="text-end">
                 <button

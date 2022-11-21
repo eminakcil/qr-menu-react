@@ -1,6 +1,7 @@
 import routes from './routes'
 import { generatePath } from 'react-router-dom'
 import dayjs from 'dayjs'
+import ErrorMessage from '@components/ErrorMessage'
 
 /**
  *
@@ -65,4 +66,12 @@ export const getPeriodTitleByStrategicPlan = (strategicPlan, seperator = ' - ') 
     seperator,
     strategicPlan.period?.at(-1)?.title
   )
+}
+
+export const errorInfo = (formik, key) => {
+  if (formik.errors?.[key] && formik.touched?.[key]) {
+    return <ErrorMessage>{formik.errors[key]}</ErrorMessage>
+  }
+
+  return null
 }
