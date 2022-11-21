@@ -1,11 +1,14 @@
 import { CategoryService } from '@/services'
+import { getPath } from '@/utils'
 import { CategoryCreateSchema } from '@/validations/CategorySchema'
 import Button from '@components/Button'
 import ErrorMessage from '@components/ErrorMessage'
 import Input from '@components/Input'
+import Loading from '@components/Loading'
 import { useFormik } from 'formik'
 import { useRef, useState } from 'react'
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom'
 
 const CategoryCreate = () => {
   const [loading, setLoading] = useState(false)
@@ -18,14 +21,28 @@ const CategoryCreate = () => {
     },
     validationSchema: CategoryCreateSchema,
     onSubmit: (values, { resetForm }) => {
+      setLoading(true)
       CategoryService.create(values)
         .then((response) => {
           resetForm()
-          toast.success('Kategori Eklendi')
+          toast.success(
+            (t) => (
+              <div className="flex items-center gap-3">
+                <span>Kategori Eklendi</span>
+                <Link
+                  className="text-sm rounded-full w-10 h-10 grid place-items-center bg-gray-800 hover:bg-gray-700"
+                  to={getPath('admin.records.categories.detail', { categoryId: response._id })}
+                  onClick={() => toast.dismiss(t.id)}
+                >
+                  git
+                </Link>
+              </div>
+            ),
+            { duration: 10000 }
+          )
         })
         .catch(() => {})
         .finally(() => setLoading(false))
-      console.log(values)
     },
     onReset: () => {
       fileInputRef.current.value = ''
@@ -65,9 +82,15 @@ const CategoryCreate = () => {
           )}
         </div>
         <Button
-          className="float-right"
+          className="float-right flex items-center"
           type="submit"
+          disabled={loading}
         >
+          {loading && (
+            <span className="mr-2">
+              <Loading size={18} />
+            </span>
+          )}
           Ekle
         </Button>
       </form>
