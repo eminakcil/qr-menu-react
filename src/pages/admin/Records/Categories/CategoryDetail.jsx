@@ -62,7 +62,7 @@ const CategoryDetail = () => {
           ))}
         </div>
       </div>
-      <FloatButton to="/admin" />
+      <FloatButton to={getPath('admin.records.products.create', { categoryId })} />
     </>
   )
 }

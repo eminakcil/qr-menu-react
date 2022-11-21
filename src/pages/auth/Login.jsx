@@ -6,11 +6,12 @@ import { LoginSchema } from '@/validations/AuthSchema'
 import Input from '@components/Input'
 import { useFormik } from 'formik'
 import toast from 'react-hot-toast'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 
 const Login = () => {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector((state) => state.auth)
+  const location = useLocation()
 
   const formik = useFormik({
     initialValues: {
