@@ -4,10 +4,12 @@ import Button from '@components/Button'
 import ErrorMessage from '@components/ErrorMessage'
 import Input from '@components/Input'
 import { useFormik } from 'formik'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import toast from 'react-hot-toast'
 
 const CategoryCreate = () => {
   const [loading, setLoading] = useState(false)
+  const fileInputRef = useRef(null)
 
   const formik = useFormik({
     initialValues: {
@@ -15,15 +17,18 @@ const CategoryCreate = () => {
       logo: undefined,
     },
     validationSchema: CategoryCreateSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       CategoryService.create(values)
         .then((response) => {
-          console.log('kaydettin tebrikler amk')
-          console.log(response)
+          resetForm()
+          toast.success('Kategori Eklendi')
         })
         .catch(() => {})
         .finally(() => setLoading(false))
       console.log(values)
+    },
+    onReset: () => {
+      fileInputRef.current.value = ''
     },
   })
 
@@ -48,6 +53,7 @@ const CategoryCreate = () => {
         </div>
         <div>
           <Input
+            ref={fileInputRef}
             type="file"
             label="Resim"
             name="logo"

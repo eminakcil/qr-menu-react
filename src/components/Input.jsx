@@ -1,6 +1,7 @@
+import { forwardRef } from 'react'
 import FormText from './FormText'
 
-export default function Input({ label, inline = false, ...props }) {
+const Input = forwardRef(({ label, inline = false, ...props }, ref) => {
   return (
     <div>
       {!inline && (
@@ -9,6 +10,7 @@ export default function Input({ label, inline = false, ...props }) {
         </label>
       )}
       <input
+        ref={ref}
         type="text"
         className="block w-full p-2.5 text-sm rounded-lg bg-gray-200 border border-gray-400 text-gray-700 placeholder-gray-500"
         placeholder={label}
@@ -16,4 +18,8 @@ export default function Input({ label, inline = false, ...props }) {
       />
     </div>
   )
-}
+})
+
+Input.displayName = 'Input'
+
+export default Input
