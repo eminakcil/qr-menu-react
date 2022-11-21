@@ -2,7 +2,7 @@ import FormText from './FormText'
 
 export default function Input({ label, inline = false, ...props }) {
   return (
-    <>
+    <div>
       {!inline && (
         <label className="block mb-2">
           <FormText>{label}</FormText>
@@ -14,6 +14,6 @@ export default function Input({ label, inline = false, ...props }) {
         placeholder={label}
         {...props}
       />
-    </>
+    </div>
   )
 }

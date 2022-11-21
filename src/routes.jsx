@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import PrivateRoute from '@components/PrivateRoute'
 import Loading from './components/Loading'
 
 const MainLayout = lazy(() => import('./layouts/MainLayout'))
@@ -9,6 +10,9 @@ const CategoryList = lazy(() => import('./pages/CategoryList'))
 const CategoryDetail = lazy(() => import('./pages/CategoryDetail'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 
+// auth pages
+const Login = lazy(() => import('./pages/auth/Login'))
+
 // admin pages
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
 const Records = lazy(() => import('./pages/admin/Records'))
@@ -16,6 +20,8 @@ const Settings = lazy(() => import('./pages/admin/Settings'))
 const Profile = lazy(() => import('./pages/admin/Profile'))
 
 const AdminCategoryDetail = lazy(() => import('@pages/admin/Records/Categories/CategoryDetail'))
+const AdminCategoryCreate = lazy(() => import('@pages/admin/Records/Categories/CategoryCreate'))
+
 const AdminProductDetail = lazy(() => import('@pages/admin/Records/Products/ProductDetail'))
 
 /** @type {import('react-router-dom').RouteObject[]} */
@@ -58,6 +64,7 @@ const routes = [
   {
     element: <AdminLayout />,
     lazy: true,
+    auth: true,
     path: 'admin',
     name: 'admin',
     children: [
@@ -83,6 +90,12 @@ const routes = [
                 path: ':categoryId',
                 name: 'detail',
                 element: <AdminCategoryDetail />,
+                lazy: true,
+              },
+              {
+                path: 'create',
+                name: 'create',
+                element: <AdminCategoryCreate />,
                 lazy: true,
               },
             ],
@@ -115,13 +128,26 @@ const routes = [
       },
     ],
   },
+  {
+    path: 'auth',
+    name: 'auth',
+    lazy: true,
+    children: [
+      {
+        name: 'login',
+        path: 'login',
+        lazy: true,
+        element: <Login />,
+      },
+    ],
+  },
 ]
 
 const mapRoute = (list) => {
   return list.map((item) => {
-    // if (item?.auth && 'element' in item) {
-    //   item.element = <PrivateRoute>{item.element}</PrivateRoute>
-    // }
+    if (item?.auth && 'element' in item) {
+      item.element = <PrivateRoute>{item.element}</PrivateRoute>
+    }
 
     if (item?.lazy && 'element' in item) {
       item.element = <Suspense fallback={<Loading />}>{item.element}</Suspense>
