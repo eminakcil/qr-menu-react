@@ -1,9 +1,17 @@
-import { errorInfo } from '@/utils'
+import { AuthService } from '@/services'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { setUser } from '@/store/authSlice'
+import { errorInfo, getPath } from '@/utils'
 import { LoginSchema } from '@/validations/AuthSchema'
 import Input from '@components/Input'
 import { useFormik } from 'formik'
+import toast from 'react-hot-toast'
+import { Navigate } from 'react-router-dom'
 
 const Login = () => {
+  const dispatch = useAppDispatch()
+  const { user } = useAppSelector((state) => state.auth)
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -11,9 +19,29 @@ const Login = () => {
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      console.log('values :>> ', values)
+      AuthService.login(values)
+        .then((response) => {
+          dispatch(setUser(response))
+        })
+        .catch(({ error }) => {
+          switch (error?.message) {
+            case 'wrong email':
+              toast.error('Hatalı E-posta Adresi')
+
+              break
+            case 'wrong password':
+              toast.error('Hatalı Şifre')
+              break
+
+            default:
+              break
+          }
+          console.warn(error)
+        })
     },
   })
+
+  if (user) return <Navigate to={location?.state?.returnUrl || getPath('admin')} />
 
   return (
     <div className="min-h-screen bg-gray-800 text-gray-300 grid place-items-center">
