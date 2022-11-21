@@ -54,6 +54,7 @@ export default function CardItem({ to, src, text, ...props }) {
           <img
             ref={imageElement}
             alt={text}
+            className="w-full h-full object-cover"
           />
           <span
             className="absolute bottom-3 left-3 text-white text-left font-medium"
