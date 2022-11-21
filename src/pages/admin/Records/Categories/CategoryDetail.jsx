@@ -62,7 +62,7 @@ const CategoryDetail = () => {
           ))}
         </div>
       </div>
-      <FloatButton />
+      <FloatButton to="/admin" />
     </>
   )
 }
