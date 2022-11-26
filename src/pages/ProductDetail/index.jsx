@@ -4,6 +4,7 @@ import { getPath } from '../../utils'
 import LazyImage from '../../components/LazyImage'
 import { ProductService } from '@/services'
 import SpinnerLoader from '@components/SpinnerLoader'
+import { IMAGE_PREFIX } from '@/contants'
 
 export default function ProductDetail() {
   const { id } = useParams()
@@ -27,8 +28,8 @@ export default function ProductDetail() {
       <div style={{ '--aspect-ratio': '1' }}>
         <div>
           <LazyImage
-            className="absolute top-0 left-0 w-full h-full object-fill rounded-b-xl"
-            src={product.photo}
+            className="absolute top-0 left-0 w-full h-full object-cover rounded-b-xl"
+            src={IMAGE_PREFIX + product.photo}
           />
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { IMAGE_PREFIX } from '@/contants'
 import { CategoryService } from '@/services'
 import { getPath } from '@/utils'
 import FloatButton from '@components/admin/FloatButton'
@@ -45,7 +46,7 @@ const Categories = () => {
                 <IconItem
                   key={category._id}
                   title={category.title}
-                  imgSrc={category.photo}
+                  imgSrc={IMAGE_PREFIX + category.photo}
                   to={getPath('admin.records.categories.detail', { categoryId: category._id })}
                 />
               ))}

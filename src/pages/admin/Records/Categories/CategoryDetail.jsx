@@ -6,6 +6,7 @@ import Button from '@components/Button'
 import SpinnerLoader from '@components/SpinnerLoader'
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { IMAGE_PREFIX } from '@/contants'
 
 const CategoryDetail = () => {
   const { categoryId } = useParams()
@@ -56,7 +57,7 @@ const CategoryDetail = () => {
             <IconItem
               key={product._id}
               title={product.title}
-              imgSrc={product.photo}
+              imgSrc={IMAGE_PREFIX + product.photo}
               to={getPath('admin.records.products.detail', { productId: product._id })}
             />
           ))}

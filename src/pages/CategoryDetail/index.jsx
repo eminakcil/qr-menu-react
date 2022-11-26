@@ -24,9 +24,8 @@ export default function CategoryDetail() {
   return (
     <div className="flex flex-col gap-4 p-4">
       <Link to={getPath('category-list')}>
-        <span className="flex gap-2">{category.title}</span>
+        <span className="flex gap-2 text-4xl">{category.title}</span>
       </Link>
-      <span>{category.title}</span>
       <div className="grid grid-cols-2 gap-4">
         {category.products.map((product) => (
           <Item

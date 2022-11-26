@@ -1,3 +1,4 @@
+import { IMAGE_PREFIX } from '@/contants'
 import { ProductService } from '@/services'
 import { getPath } from '@/utils'
 import Button from '@components/Button'
@@ -52,7 +53,7 @@ const ProductDetail = () => {
       <span className="font-medium text-xl">{product.title}</span>
       <div className="flex gap-3">
         <img
-          src={product.photo}
+          src={IMAGE_PREFIX + product.photo}
           alt={product.title}
           className="rounded-2xl w-56 aspect-square object-cover"
         />
