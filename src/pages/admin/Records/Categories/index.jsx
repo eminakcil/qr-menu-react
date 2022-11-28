@@ -1,12 +1,15 @@
 import { IMAGE_PREFIX } from '@/contants'
 import { CategoryService } from '@/services'
 import { getPath } from '@/utils'
-import FloatButton from '@components/admin/FloatButton'
+import FloatButton from '@components/admin/Buttons/FloatButton'
+import FloatingContainer from '@components/admin/FloatingContainer'
 import IconItem from '@components/admin/IconItem'
 import Button from '@components/Button'
 import SpinnerLoader from '@components/SpinnerLoader'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
+import { GoPlus } from 'react-icons/go'
+import { Link } from 'react-router-dom'
 
 const Categories = () => {
   const [categoryList, setCategoryList] = useState(false)
@@ -53,7 +56,12 @@ const Categories = () => {
           </div>
         )}
       </div>
-      <FloatButton to={getPath('admin.records.categories.create')} />
+      <FloatingContainer>
+        <FloatButton
+          icon={GoPlus}
+          to={getPath('admin.records.categories.create')}
+        />
+      </FloatingContainer>
     </>
   )
 }

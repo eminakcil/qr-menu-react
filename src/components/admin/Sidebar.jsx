@@ -1,29 +1,29 @@
 import { NavLink } from 'react-router-dom'
-import { GoDashboard, GoFileDirectory, GoSettings, GoPerson } from 'react-icons/go'
+import { GoFileDirectory } from 'react-icons/go'
 import { getPath } from '@/utils'
 import classNames from 'classnames'
 const Sidebar = () => {
   const routes = [
-    {
-      routeName: 'admin',
-      icon: GoDashboard,
-      text: 'Gösterge Paneli',
-    },
+    // {
+    //   routeName: 'admin',
+    //   icon: GoDashboard,
+    //   text: 'Gösterge Paneli',
+    // },
     {
       routeName: 'admin.records',
       icon: GoFileDirectory,
       text: 'Kayıtlar',
     },
-    {
-      routeName: 'admin.settings',
-      icon: GoSettings,
-      text: 'Ayarlar',
-    },
-    {
-      routeName: 'admin.profile',
-      icon: GoPerson,
-      text: 'Profilim',
-    },
+    // {
+    //   routeName: 'admin.settings',
+    //   icon: GoSettings,
+    //   text: 'Ayarlar',
+    // },
+    // {
+    //   routeName: 'admin.profile',
+    //   icon: GoPerson,
+    //   text: 'Profilim',
+    // },
   ]
 
   return (

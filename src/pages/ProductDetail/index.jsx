@@ -36,7 +36,7 @@ export default function ProductDetail() {
 
       <div className="px-4">
         <Link to={getPath('categoryDetail', { id: product.category._id })}>
-          <span className="flex gap-2">{product.category.title}</span>
+          <span className="flex gap-2 text-xl">{product.category.title}</span>
         </Link>
       </div>
 

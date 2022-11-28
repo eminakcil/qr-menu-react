@@ -1,12 +1,14 @@
 import { CategoryService } from '@/services'
 import { getPath } from '@/utils'
-import FloatButton from '@components/admin/FloatButton'
 import IconItem from '@components/admin/IconItem'
 import Button from '@components/Button'
 import SpinnerLoader from '@components/SpinnerLoader'
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { IMAGE_PREFIX } from '@/contants'
+import FloatingContainer from '@components/admin/FloatingContainer'
+import { GoPencil, GoPlus } from 'react-icons/go'
+import FloatButton from '@components/admin/Buttons/FloatButton'
 
 const CategoryDetail = () => {
   const { categoryId } = useParams()
@@ -63,7 +65,16 @@ const CategoryDetail = () => {
           ))}
         </div>
       </div>
-      <FloatButton to={getPath('admin.records.products.create', { categoryId })} />
+      <FloatingContainer>
+        <FloatButton
+          icon={GoPencil}
+          to={getPath('admin.records.products.create', { categoryId })}
+        />
+        <FloatButton
+          icon={GoPlus}
+          to={getPath('admin.records.products.create', { categoryId })}
+        />
+      </FloatingContainer>
     </>
   )
 }

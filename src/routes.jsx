@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import { Navigate } from 'react-router-dom'
 import PrivateRoute from '@components/PrivateRoute'
 import Loading from './components/Loading'
 
@@ -14,10 +15,10 @@ const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 const Login = lazy(() => import('./pages/auth/Login'))
 
 // admin pages
-const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
+// const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
 const Records = lazy(() => import('./pages/admin/Records'))
-const Settings = lazy(() => import('./pages/admin/Settings'))
-const Profile = lazy(() => import('./pages/admin/Profile'))
+// const Settings = lazy(() => import('./pages/admin/Settings'))
+// const Profile = lazy(() => import('./pages/admin/Profile'))
 
 const AdminCategoryDetail = lazy(() => import('@pages/admin/Records/Categories/CategoryDetail'))
 const AdminCategoryCreate = lazy(() => import('@pages/admin/Records/Categories/CategoryCreate'))
@@ -71,7 +72,12 @@ const routes = [
     children: [
       {
         index: true,
-        element: <Dashboard />,
+        element: (
+          <Navigate
+            to="records"
+            replace
+          />
+        ),
         lazy: true,
       },
       {
@@ -121,18 +127,18 @@ const routes = [
           },
         ],
       },
-      {
-        path: 'settings',
-        name: 'settings',
-        element: <Settings />,
-        lazy: true,
-      },
-      {
-        path: 'profile',
-        name: 'profile',
-        element: <Profile />,
-        lazy: true,
-      },
+      // {
+      //   path: 'settings',
+      //   name: 'settings',
+      //   element: <Settings />,
+      //   lazy: true,
+      // },
+      // {
+      //   path: 'profile',
+      //   name: 'profile',
+      //   element: <Profile />,
+      //   lazy: true,
+      // },
     ],
   },
   {
