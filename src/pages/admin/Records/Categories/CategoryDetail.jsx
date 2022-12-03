@@ -68,7 +68,7 @@ const CategoryDetail = () => {
       <FloatingContainer>
         <FloatButton
           icon={GoPencil}
-          to={getPath('admin.records.products.create', { categoryId })}
+          to={getPath('admin.records.categories.edit', { categoryId })}
         />
         <FloatButton
           icon={GoPlus}

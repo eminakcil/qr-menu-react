@@ -9,7 +9,6 @@ import SpinnerLoader from '@components/SpinnerLoader'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 import { GoPlus } from 'react-icons/go'
-import { Link } from 'react-router-dom'
 
 const Categories = () => {
   const [categoryList, setCategoryList] = useState(false)

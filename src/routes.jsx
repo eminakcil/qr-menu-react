@@ -22,6 +22,7 @@ const Records = lazy(() => import('./pages/admin/Records'))
 
 const AdminCategoryDetail = lazy(() => import('@pages/admin/Records/Categories/CategoryDetail'))
 const AdminCategoryCreate = lazy(() => import('@pages/admin/Records/Categories/CategoryCreate'))
+const AdminCategoryEdit = lazy(() => import('@pages/admin/Records/Categories/CategoryEdit'))
 
 const AdminProductDetail = lazy(() => import('@pages/admin/Records/Products/ProductDetail'))
 const AdminProductCreate = lazy(() => import('@pages/admin/Records/Products/ProductCreate'))
@@ -94,15 +95,21 @@ const routes = [
             name: 'categories',
             children: [
               {
+                path: 'create',
+                name: 'create',
+                element: <AdminCategoryCreate />,
+                lazy: true,
+              },
+              {
                 path: ':categoryId',
                 name: 'detail',
                 element: <AdminCategoryDetail />,
                 lazy: true,
               },
               {
-                path: 'create',
-                name: 'create',
-                element: <AdminCategoryCreate />,
+                path: ':categoryId/edit',
+                name: 'edit',
+                element: <AdminCategoryEdit />,
                 lazy: true,
               },
             ],
