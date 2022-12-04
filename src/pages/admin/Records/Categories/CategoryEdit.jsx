@@ -88,7 +88,7 @@ const CategoryEdit = () => {
           })
         })
         .catch(() => {
-          toast.success('Kategori Güncellenmedi')
+          toast.error('Kategori Güncellenmedi')
         })
         .finally(() => setLoading(false))
     },
