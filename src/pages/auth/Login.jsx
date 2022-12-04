@@ -23,6 +23,7 @@ const Login = () => {
       AuthService.login(values)
         .then((response) => {
           dispatch(setUser(response))
+          toast.success('Giriş Yapıldı')
         })
         .catch(({ error }) => {
           switch (error?.message) {
