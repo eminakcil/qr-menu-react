@@ -2,12 +2,13 @@ import { IMAGE_PREFIX } from '@/contants'
 import { CategoryService } from '@/services'
 import { errorInfo, getPath } from '@/utils'
 import { CategoryEditSchema } from '@/validations/CategorySchema'
+import ImageInput from '@components/admin/ImageInput'
 import Button from '@components/Button'
 import Input from '@components/Input'
 import Loading from '@components/Loading'
 import SpinnerLoader from '@components/SpinnerLoader'
 import { useFormik } from 'formik'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useParams, useNavigate } from 'react-router-dom'
 
@@ -37,25 +38,9 @@ const CategoryEdit = () => {
       })
   }, [])
 
-  const fileInputRef = useRef(null)
-  const [fileDataUrl, setfileDataUrl] = useState(false)
-
-  const handleFileChange = (_e) => {
-    const file = _e.target.files?.[0]
-    formik.setFieldValue('logo', file)
-
-    if (file) {
-      const fileReader = new FileReader()
-      fileReader.onload = (e) => {
-        const { result } = e.target
-        if (result) {
-          setfileDataUrl(result)
-        }
-      }
-      fileReader.readAsDataURL(file)
-    } else {
-      setfileDataUrl(false)
-    }
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0]
+    formik.setFieldValue('logo', file || '')
   }
 
   const formik = useFormik({
@@ -92,9 +77,6 @@ const CategoryEdit = () => {
         })
         .finally(() => setLoading(false))
     },
-    onReset: () => {
-      fileInputRef.current.value = ''
-    },
   })
 
   useEffect(() => {
@@ -128,21 +110,11 @@ const CategoryEdit = () => {
         {errorInfo(formik, 'title')}
       </div>
       <div>
-        <img
-          src={fileDataUrl || IMAGE_PREFIX + category.photo}
-          alt=""
-          className="w-full aspect-square object-cover rounded-xl cursor-pointer "
-          onClick={() => fileInputRef.current.click()}
-        />
-        {errorInfo(formik, 'logo')}
-
-        <input
-          ref={fileInputRef}
-          hidden
-          type="file"
-          name="logo"
+        <ImageInput
+          initalPhoto={IMAGE_PREFIX + category.photo}
           onChange={handleFileChange}
         />
+        {errorInfo(formik, 'logo')}
       </div>
       <Button
         className="float-right flex items-center"
