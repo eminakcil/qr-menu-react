@@ -9,6 +9,7 @@ import { IMAGE_PREFIX } from '@/contants'
 import FloatingContainer from '@components/admin/FloatingContainer'
 import { GoPencil, GoPlus } from 'react-icons/go'
 import FloatButton from '@components/admin/Buttons/FloatButton'
+import Divider from '@components/Divider'
 
 const CategoryDetail = () => {
   const { categoryId } = useParams()
@@ -53,7 +54,17 @@ const CategoryDetail = () => {
         >
           Kategoriler
         </Link>
-        <span className="font-medium text-xl">{category.title}</span>
+        <Divider />
+        <div className="flex items-center">
+          <span className="font-medium text-3xl">{category.title}</span>
+          <div className="ml-auto w-36 px-3">
+            <img
+              src={IMAGE_PREFIX + category.photo}
+              className="w-full aspect-square object-cover rounded-3xl"
+            />
+          </div>
+        </div>
+        <Divider />
         <div className="flex gap-1 flex-wrap">
           {category.products.map((product) => (
             <IconItem
