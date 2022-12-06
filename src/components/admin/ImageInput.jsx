@@ -26,7 +26,7 @@ const ImageInput = forwardRef(({ onChange, initalPhoto, ...props }, ref) => {
 
   useImperativeHandle(ref, () => ({
     clear: () => {
-      setfileDataUrl(false)
+      setfileDataUrl('')
     },
   }))
 

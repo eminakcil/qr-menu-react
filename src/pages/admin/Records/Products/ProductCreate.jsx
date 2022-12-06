@@ -1,6 +1,7 @@
 import { ProductService } from '@/services'
 import { errorInfo, getPath } from '@/utils'
 import { ProductCreateSchema } from '@/validations/ProductSchema'
+import ImageInput from '@components/admin/ImageInput'
 import Button from '@components/Button'
 import Input from '@components/Input'
 import Loading from '@components/Loading'
@@ -48,9 +49,14 @@ const ProductCreate = () => {
         .finally(() => setLoading(false))
     },
     onReset: () => {
-      fileInputRef.current.value = ''
+      fileInputRef.current.clear()
     },
   })
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0]
+    formik.setFieldValue('logo', file || '')
+  }
 
   return (
     <div>
@@ -80,13 +86,9 @@ const ProductCreate = () => {
           {errorInfo(formik, 'price')}
         </div>
         <div>
-          <Input
+          <ImageInput
             ref={fileInputRef}
-            type="file"
-            label="Resim"
-            name="logo"
-            onChange={(e) => formik.setFieldValue('logo', e.target.files[0])}
-            onBlur={formik.handleBlur}
+            onChange={handleFileChange}
           />
           {errorInfo(formik, 'logo')}
         </div>
