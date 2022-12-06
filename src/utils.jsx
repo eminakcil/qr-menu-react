@@ -25,8 +25,12 @@ export const prepRoutes = (routeList = routes, prefix) => {
 }
 
 /**
+ *  @typedef {'categoryDetail'|'productDetail'|'admin'|'admin.records'|'admin.records.categories'|'admin.records.categories.create'|'admin.records.categories.detail'|'admin.records.categories.edit'|'admin.records.products.detail'|'admin.records.products.edit'|'admin.records.products.create'|'auth.login'} routeNames
+ */
+
+/**
  *
- * @param {string} path
+ * @param {routeNames} path
  * @param {object} data
  */
 export const getPath = (path, data = {}) => {
