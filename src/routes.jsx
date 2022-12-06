@@ -26,6 +26,7 @@ const AdminCategoryEdit = lazy(() => import('@pages/admin/Records/Categories/Cat
 
 const AdminProductDetail = lazy(() => import('@pages/admin/Records/Products/ProductDetail'))
 const AdminProductCreate = lazy(() => import('@pages/admin/Records/Products/ProductCreate'))
+const AdminProductEdit = lazy(() => import('@pages/admin/Records/Products/ProductEdit'))
 
 /** @type {import('react-router-dom').RouteObject[]} */
 
@@ -122,6 +123,12 @@ const routes = [
                 path: ':productId',
                 name: 'detail',
                 element: <AdminProductDetail />,
+                lazy: true,
+              },
+              {
+                path: ':productId/edit',
+                name: 'edit',
+                element: <AdminProductEdit />,
                 lazy: true,
               },
               {

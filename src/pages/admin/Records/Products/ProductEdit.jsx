@@ -3,10 +3,12 @@ import { ProductService } from '@/services'
 import { getPath } from '@/utils'
 import FloatButton from '@components/admin/Buttons/FloatButton'
 import FloatingContainer from '@components/admin/FloatingContainer'
+import ImageInput from '@components/admin/ImageInput'
 import Button from '@components/Button'
+import Input from '@components/Input'
 import SpinnerLoader from '@components/SpinnerLoader'
 import { useCallback, useEffect, useState } from 'react'
-import { GoPencil } from 'react-icons/go'
+import { GoCheck, GoX } from 'react-icons/go'
 import { Link, useParams } from 'react-router-dom'
 
 const ProductDetail = () => {
@@ -54,21 +56,35 @@ const ProductDetail = () => {
         >
           {product.category.title}
         </Link>
-        <span className="font-medium text-xl">{product.title}</span>
-        <div className="flex gap-3">
-          <img
-            src={IMAGE_PREFIX + product.photo}
-            alt={product.title}
-            className="rounded-2xl w-56 aspect-square object-cover"
-          />
-          <span className="text-lg mt-auto">{product.price} ₺</span>
+        <div className="max-w-xs">
+          <Input value={product.title} />
         </div>
-        <div>{product.description}</div>
+        <div className="flex gap-3">
+          <div className="rounded-2xl w-56">
+            <ImageInput initalPhoto={IMAGE_PREFIX + product.photo} />
+          </div>
+
+          <div className="mt-auto">
+            <Input value={product.price} />
+          </div>
+        </div>
+        <div className="max-w-[417px]">
+          <Input
+            type="textarea"
+            rows="6"
+            value={product.description}
+          />
+        </div>
       </div>
       <FloatingContainer>
         <FloatButton
-          icon={GoPencil}
-          to="edit"
+          icon={GoX}
+          size={16}
+          to={getPath('admin.records.products.detail', { productId })}
+        />
+        <FloatButton
+          icon={GoCheck}
+          link={false}
         />
       </FloatingContainer>
     </>
