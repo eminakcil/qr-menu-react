@@ -1,17 +1,20 @@
 import Button from '@components/Button'
 import { Link } from 'react-router-dom'
 
-const FloatButton = ({ to, icon }) => {
+const FloatButton = ({ icon, size = 24, link = true, ...props }) => {
   const Icon = icon
+
   return (
-    <Button
-      variant="dark"
-      circle={true}
-      as={Link}
-      to={to}
-    >
-      <Icon className="w-6 h-6" />
-    </Button>
+    <div className="grid place-items-center">
+      <Button
+        variant="dark"
+        circle={true}
+        {...(link && { as: Link })}
+        {...props}
+      >
+        <Icon size={size} />
+      </Button>
+    </div>
   )
 }
 export default FloatButton
