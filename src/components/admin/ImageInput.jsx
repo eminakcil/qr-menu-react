@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react'
+import { forwardRef, useImperativeHandle, useRef } from 'react'
+import { useState } from 'react'
 
-const ImageInput = ({ onChange, initalPhoto, ...props }) => {
+const ImageInput = forwardRef(({ onChange, initalPhoto, ...props }, ref) => {
   const [fileDataUrl, setfileDataUrl] = useState(false)
   const fileInputRef = useRef()
 
@@ -23,6 +24,12 @@ const ImageInput = ({ onChange, initalPhoto, ...props }) => {
     onChange(_e)
   }
 
+  useImperativeHandle(ref, () => ({
+    clear: () => {
+      setfileDataUrl(false)
+    },
+  }))
+
   return (
     <>
       <img
@@ -40,5 +47,8 @@ const ImageInput = ({ onChange, initalPhoto, ...props }) => {
       />
     </>
   )
-}
+})
+
+ImageInput.displayName = 'ImageInput'
+
 export default ImageInput

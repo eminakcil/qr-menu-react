@@ -1,8 +1,9 @@
 import { CategoryService } from '@/services'
-import { getPath } from '@/utils'
+import { errorInfo, getPath } from '@/utils'
 import { CategoryCreateSchema } from '@/validations/CategorySchema'
+import ImageInput from '@components/admin/ImageInput'
 import Button from '@components/Button'
-import ErrorMessage from '@components/ErrorMessage'
+import FormText from '@components/FormText'
 import Input from '@components/Input'
 import Loading from '@components/Loading'
 import { useFormik } from 'formik'
@@ -45,9 +46,14 @@ const CategoryCreate = () => {
         .finally(() => setLoading(false))
     },
     onReset: () => {
-      fileInputRef.current.value = ''
+      fileInputRef.current.clear()
     },
   })
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0]
+    formik.setFieldValue('logo', file || '')
+  }
 
   return (
     <div>
@@ -64,22 +70,16 @@ const CategoryCreate = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.title && formik.touched.title && (
-            <ErrorMessage>{formik.errors.title}</ErrorMessage>
-          )}
+          {errorInfo(formik, 'title')}
         </div>
         <div>
-          <Input
+          <label className="block mb-2">
+            <FormText>Resim</FormText>
+          </label>
+          <ImageInput
             ref={fileInputRef}
-            type="file"
-            label="Resim"
-            name="logo"
-            onChange={(e) => formik.setFieldValue('logo', e.target.files[0])}
-            onBlur={formik.handleBlur}
+            onChange={handleFileChange}
           />
-          {formik.errors.logo && formik.touched.logo && (
-            <ErrorMessage>{formik.errors.logo}</ErrorMessage>
-          )}
         </div>
         <Button
           className="float-right flex items-center"
