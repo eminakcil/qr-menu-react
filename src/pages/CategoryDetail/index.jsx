@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { getPath } from '../../utils'
 import { CategoryService } from '@/services'
 import SpinnerLoader from '@components/SpinnerLoader'
+import { IoArrowBack } from 'react-icons/io5'
 
 export default function CategoryDetail() {
   const { id } = useParams()
@@ -23,8 +24,12 @@ export default function CategoryDetail() {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <Link to={getPath('category-list')}>
-        <span className="flex gap-2 text-4xl">{category.title}</span>
+      <Link
+        to={getPath('category-list')}
+        className="flex gap-2 items-center"
+      >
+        <IoArrowBack size={24} />
+        <span className="text-4xl">{category.title}</span>
       </Link>
       <div className="grid grid-cols-2 gap-4">
         {category.products.map((product) => (

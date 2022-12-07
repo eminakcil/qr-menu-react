@@ -5,6 +5,7 @@ import LazyImage from '../../components/LazyImage'
 import { ProductService } from '@/services'
 import SpinnerLoader from '@components/SpinnerLoader'
 import { IMAGE_PREFIX } from '@/contants'
+import { IoArrowBack } from 'react-icons/io5'
 
 export default function ProductDetail() {
   const { id } = useParams()
@@ -35,8 +36,12 @@ export default function ProductDetail() {
       </div>
 
       <div className="px-4">
-        <Link to={getPath('categoryDetail', { id: product.category._id })}>
-          <span className="flex gap-2 text-xl">{product.category.title}</span>
+        <Link
+          to={getPath('categoryDetail', { id: product.category._id })}
+          className="flex gap-2 items-center"
+        >
+          <IoArrowBack size={16} />
+          <span className="text-xl">{product.category.title}</span>
         </Link>
       </div>
 
