@@ -2,6 +2,9 @@ import routes from './routes'
 import { generatePath } from 'react-router-dom'
 import dayjs from 'dayjs'
 import ErrorMessage from '@components/ErrorMessage'
+import store from './store'
+import { setUser } from './store/authSlice'
+import toast from 'react-hot-toast'
 
 /**
  *
@@ -78,4 +81,9 @@ export const errorInfo = (formik, key) => {
   }
 
   return null
+}
+
+export const logout = () => {
+  store.dispatch(setUser(false))
+  toast('Çıkış Yapıldı')
 }

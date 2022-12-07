@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { GoFileDirectory } from 'react-icons/go'
 import { getPath } from '@/utils'
 import classNames from 'classnames'
@@ -27,8 +27,14 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className="w-72 shrink-0">
+    <div className="w-72 shrink-0 bg-gray-900">
       <div className="flex flex-col divide-y divide-gray-500">
+        <Link
+          className="px-3 py-4 text-2xl font-medium"
+          to="/"
+        >
+          Menüm
+        </Link>
         {routes.map((route, index) => (
           <NavLink
             end

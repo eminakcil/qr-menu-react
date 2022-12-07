@@ -11,15 +11,15 @@ const AdminLayout = () => {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-800 text-gray-300">
-      <Header />
-      <div className="flex-1 flex w-full">
-        <Sidebar />
+    <div className="flex bg-gray-800 text-gray-300">
+      <Sidebar />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <Header />
         <div className="px-3 flex-1">
           <Outlet />
         </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   )
 }
